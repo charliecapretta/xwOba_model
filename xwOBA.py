@@ -98,15 +98,15 @@ class XwOBAModel:
             results[batter] = round(self.get_batter_xwoba(batter_df), 3)
         return results
 
-
-HISTORICAL_CSV = '/Users/charliecapretta/Desktop/TrackManData/TrackmanFiles/gcsu_baseball_data(in).csv'
+#Input CSV
+HISTORICAL_CSV = 'Trackman.csv'
 xwoba_model = XwOBAModel(n_neighbors=10)
 xwoba_model.train(HISTORICAL_CSV)
 
 
 def get_players_xwOBA(season_df=None, team_code='GEO_COL1'):
     if season_df is None:
-        files = glob.glob('/Users/charliecapretta/Desktop/TrackManData/Spring2026TrackmanCSVs/*.csv')
+        files = glob.glob('Trackman*.csv')
         season_df = pd.concat((pd.read_csv(f) for f in files), ignore_index=True)
     return xwoba_model.get_players_xwoba(season_df, team_code=team_code)
 
